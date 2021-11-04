@@ -1,0 +1,81 @@
+Winform开发全套31个UI组件开源共享
+作者：梦里花落知多少
+
+一. 简介
+这套UI库是上一个公司（好几年前了）完成的。当时主要为开发公司内部ERP系统，重新设计实现了所有用到的Winform组建，包括Form窗体组建6个（支持换肤），基础控件25个。其中有很多参考借鉴其他开源组件，也有几个是集成的别人的组件，然后做了些调整。
+
+　　现在已经好几年不做Winform开发了，整理一下共享出来，希望能够给需要的朋友一些帮助。在Win8、win10上运行是没有什么大的问题的，好像有写重绘的小bug，应该是个很容易解决的问题，没有继续深究它了。
+
+二．Form窗体组件
+2.1 BaseForm基础窗体控件，窗体是完全重新绘制 的，扩展性也不错。所有其他窗体Form组建都是继承该组件的。
+2.2 显示错误异常消息的窗体 ErrorBox，主要是在全局扑获异常显示错误消息用的
+2.3 PopBox，类似QQ弹窗类的右下角弹出窗体，可以自定义内容
+2.4 等待窗体，用户执行等待耗时操作显示的窗体，在BaseForm上实现了调用接口，使用非常简单，实例代码：
+private void txButton7_Click(object sender, EventArgs e)
+        {
+            this.Waiting(() =>
+            {
+                System.Threading.Thread.Sleep(12000);
+            });
+        }
+ 
+
+2.5 MessageBox ，包括消息提示、警告提示、错误提示、询问提示，也是在BaseFrom中提供了接口，使用很简单
+private void txButton3_Click(object sender, EventArgs e)
+{
+    this.Info("提示消息！");
+}
+ 
+private void txButton5_Click(object sender, EventArgs e)
+{
+    this.Warning("客官，请自重！");
+}
+ 
+private void txButton6_Click(object sender, EventArgs e)
+{
+    this.Error("出错了！");
+}
+ 
+private void txButton8_Click(object sender, EventArgs e)
+{
+    this.Question("你确定要退出吗？");
+}
+
+2.6 主窗体，主窗体主要多了两个东西：a)类似Office2007的水晶Logo按钮，b)换肤控件
+
+三．基础控件
+3.1 Docking组件， 就是用于dock布局的控件，来自网络开源组件，具体可以查看源码。
+3.2 TXTreeComboBox，树形下拉选择控件，选择框中默认显示选中节点及其父节点的全路径值，绑定代码：
+
+this.txTreeComboBox1.DataSource = TestData.GetTreeData(10);
+            this.txTreeComboBox1.MultiLevelDataSourceMember = "Users";
+            this.txTreeComboBox1.DisplayMember = "Name";
+            this.txTreeComboBox1.ValueMember = "Value";
+            this.txTreeComboBox1.BindData();
+ 
+3.3 MultiselectComboBox 下拉多选控件
+3.4 TemplateListView 列表数据呈现控件，功能很强大的，这个原本是另一个同事做的，在其基础上封装的。
+3.5 TreeListView 树形列表
+3.6 ThumbnialView 缩略图列表控件 
+3.7 TXButton一般按钮，主要是重绘了按钮的外观，可以设置圆角、图标等
+3.8 TXCheckBox 复选框
+3.9 TXComboBox 下拉选择框
+3.10 TXDateTimePicker 日期选择控件，在Win10下好像有显示的小bug
+3.11 TXGroupBox 重绘了原来的GroupBox，有更多的显示控制，支持QQ的一个分组效果
+3.12 TXHtmlEditor HTML编辑器，这个组建来自网络，在其基础上完善、添加了一些功能，如HTML源码编辑、效果预览，图片上传等。
+3.13 TXListView 列表组建，继承自ListView，主要是外观的扩展重绘。3.4TemplateListView，3.5TreeListView都是继承自 TXListView组件。
+3.14 MonthCalendar日历控件，这个好像也是来自网络，可以基于日历实现更丰富的功能，在当时项目中是实现了一个每天房价、活动呈现操作等需求。
+3.15 TXPager分页控件，与列表配合使用
+3.16 TXPander、TXPanderPanelList这个是类似outlook风格的可收缩、布局的容器控件，主要来自网络。
+3.17 TXPanel可以收缩、关闭，包含标题的Panel控件
+3.18 TXRadioButton 单选控件
+3.19 TXRangeValue 多范围设置组件，这是属于业务组件。
+3.20 TXTabControl继承自微软 TabControl，主要是做了UI的美化重绘，可以设置各种样式、颜色
+3.21 TXTableLayoutPanel，这个是Winform中比较常用的布局控件，继承自微软的TableLayoutPanel，主要是解决了滚动条的显示问题
+3.22 TXTextBox，文本输入框
+3.23 TXToolBar工具栏
+3.24 TXToolStrip状态栏
+3.25 菜单
+
+本代码由好库网收集整理，版权归原作者所有，更多源代码请访问：
+http://www.okbase.net
